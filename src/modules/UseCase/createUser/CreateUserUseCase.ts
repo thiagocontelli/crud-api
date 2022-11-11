@@ -15,7 +15,7 @@ class CreateUserUseCase {
 		const passwordRegex =
 			/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-		const userAlreadyExists = this.userRepository.findByEmail(email);
+		const emailAlreadyExists = this.userRepository.findByEmail(email);
 
 		if (!emailRegex.test(email)) {
 			throw new Error('E-mail address is invalid!');
@@ -27,7 +27,7 @@ class CreateUserUseCase {
 			);
 		}
 
-		if (userAlreadyExists) {
+		if (emailAlreadyExists) {
 			throw new Error('This e-mail already exists!');
 		}
 
