@@ -1,4 +1,4 @@
-import { User } from "../model/User";
+import { User } from '../model/User';
 
 interface IUserRepositoryDTO {
 	name: string;
@@ -8,7 +8,8 @@ interface IUserRepositoryDTO {
 
 interface IUserRepository {
 	create({ name, email, password }): void;
-  findByEmail(email: string): User;
+	findByEmail(email: string): User;
+	list(): User[];
 }
 
 export { IUserRepository, IUserRepositoryDTO };
