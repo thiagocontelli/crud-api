@@ -19,6 +19,10 @@ class UserRepository implements IUserRepository {
 
 		return this.users.push(user);
 	}
+
+	findByEmail(email: string): User {
+		return this.users.find(user => user.email === email);
+	}
 }
 
 export { UserRepository };
