@@ -1,5 +1,6 @@
 import { User } from '../../model/User';
 import { IUserRepositoryDTO, IUserRepository } from '../IUserRepository';
+import bcrypt from 'bcrypt';
 
 class UserRepository implements IUserRepository {
 	private users: User[];
@@ -18,20 +19,32 @@ class UserRepository implements IUserRepository {
 		return UserRepository.INSTANCE;
 	}
 
-	create({ name, email, password }: IUserRepositoryDTO) {
-		const user = new User();
+	async create({ name, email, password }: IUserRepositoryDTO) {
+		try {
+			const user = new User();
 
-		Object.assign(user, {
-			name,
-			email,
-			password,
-		});
+			const hashedPassword = await this.encrypt(password);
 
-		return this.users.push(user);
+			Object.assign(user, {
+				name,
+				email,
+				password: hashedPassword,
+			});
+
+			return this.users.push(user);
+		} catch (error) {
+			throw new Error(error);
+		}
 	}
 
 	list(): User[] {
 		return this.users;
+	}
+
+	async encrypt(password: string): Promise<string> {
+		const hashedPassword = await bcrypt.hash(password, 10);
+
+		return hashedPassword;
 	}
 
 	findByEmail(email: string): User {
