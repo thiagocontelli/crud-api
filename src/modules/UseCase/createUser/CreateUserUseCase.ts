@@ -6,7 +6,7 @@ interface IRequest {
 	password: string;
 }
 
-class UserUseCase {
+class CreateUserUseCase {
 	constructor(private userRepository: IUserRepository) {}
 
 	execute({ name, email, password }: IRequest): void {
@@ -35,4 +35,4 @@ class UserUseCase {
 	}
 }
 
-export { UserUseCase };
+export { CreateUserUseCase };
