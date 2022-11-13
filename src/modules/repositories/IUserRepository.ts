@@ -7,10 +7,12 @@ interface IUserRepositoryDTO {
 }
 
 interface IUserRepository {
-	create({ name, email, password }): void;
+	create({ name, email, password }: IUserRepositoryDTO): void;
 	findByEmail(email: string): User;
+	findById(id: string): User;
 	list(): User[];
 	encrypt(password: string): Promise<string>;
+	update({ name, email, password, id }: User): Promise<void>;
 }
 
 export { IUserRepository, IUserRepositoryDTO };

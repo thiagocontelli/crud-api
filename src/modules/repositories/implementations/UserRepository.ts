@@ -41,6 +41,18 @@ class UserRepository implements IUserRepository {
 		return this.users;
 	}
 
+	async update({ id, name, email, password }: User): Promise<void> {
+		const user = this.users.find(user => user.id === id);
+
+		const hashedPassword = password !== '' && (await this.encrypt(password));
+
+		Object.assign(user, {
+			name: name !== '' ? name : user.name,
+			email: email !== '' ? email : user.email,
+			password: password !== '' ? hashedPassword : user.password,
+		});
+	}
+
 	async encrypt(password: string): Promise<string> {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -49,6 +61,10 @@ class UserRepository implements IUserRepository {
 
 	findByEmail(email: string): User {
 		return this.users.find(user => user.email === email);
+	}
+
+	findById(id: string): User {
+		return this.users.find(user => user.id === id);
 	}
 }
 
