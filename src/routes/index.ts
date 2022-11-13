@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { userRoutes } from './user.routes';
+import { bookRoutes } from './user.routes';
 
 const router = Router();
 
-router.use('/users', userRoutes);
+router.use('/books', bookRoutes);
 
 export { router };

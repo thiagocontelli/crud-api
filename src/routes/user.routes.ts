@@ -1,26 +1,26 @@
 import { Router } from 'express';
 
-import { createUserController } from '../modules/UseCase/createUser';
-import { deleteUserController } from '../modules/UseCase/deleteUser';
-import { listUsersController } from '../modules/UseCase/listUsers';
-import { updateUserController } from '../modules/UseCase/updateUser';
+import { createBookController } from '../modules/UseCase/createBook';
+import { deleteBookController } from '../modules/UseCase/deleteBook';
+import { listBooksController } from '../modules/UseCase/listBooks';
+import { updateBookController } from '../modules/UseCase/updateBook';
 
-const userRoutes = Router();
+const bookRoutes = Router();
 
-userRoutes.post('/', (request, response) => {
-	return createUserController.handle(request, response);
+bookRoutes.post('/', (request, response) => {
+	return createBookController.handle(request, response);
 });
 
-userRoutes.get('/', (request, response) => {
-	return listUsersController.handle(request, response);
+bookRoutes.get('/', (request, response) => {
+	return listBooksController.handle(request, response);
 });
 
-userRoutes.put('/:id', (request, response) => {
-	return updateUserController.handle(request, response);
+bookRoutes.put('/:id', (request, response) => {
+	return updateBookController.handle(request, response);
 });
 
-userRoutes.delete('/:id', (request, response) => {
-	return deleteUserController.handle(request, response);
+bookRoutes.delete('/:id', (request, response) => {
+	return deleteBookController.handle(request, response);
 });
 
-export { userRoutes };
+export { bookRoutes };
