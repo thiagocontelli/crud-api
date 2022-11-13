@@ -13,6 +13,7 @@ interface IUserRepository {
 	list(): User[];
 	encrypt(password: string): Promise<string>;
 	update({ name, email, password, id }: User): Promise<void>;
+	delete(id: string): void;
 }
 
 export { IUserRepository, IUserRepositoryDTO };

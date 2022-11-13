@@ -53,6 +53,12 @@ class UserRepository implements IUserRepository {
 		});
 	}
 
+	delete(id: string): void {
+		this.users = this.users.filter(user => user.id !== id);
+
+		console.log(this.users);
+	}
+
 	async encrypt(password: string): Promise<string> {
 		const hashedPassword = await bcrypt.hash(password, 10);
 
